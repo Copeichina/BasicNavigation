@@ -13,4 +13,15 @@ public  class StringUtility {
         }
 
     }
+
+    public static void verifyStartsWith(String expectedValue,String actualValue){
+        if(actualValue.startsWith(expectedValue)){
+            System.out.println("Pass");
+        }else{
+            System.out.println("Fail");
+            System.out.println("Actual "+actualValue);
+            System.out.println("Expected "+expectedValue);
+        }
+    }
+
 }

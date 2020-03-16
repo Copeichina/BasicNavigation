@@ -11,28 +11,24 @@ import org.openqa.selenium.safari.SafariDriver;
 
 public class BrowserFactory {
 
-    public static WebDriver getDriver(String driverType) {
-
-        WebDriver driver = null;
-        if (driverType.equalsIgnoreCase("chrome")) {
-            WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver();
-        } else if (driverType.equalsIgnoreCase("firefox")) {
-            WebDriverManager.firefoxdriver().setup();
-            driver = new FirefoxDriver();
-        } else if (driverType.equalsIgnoreCase("safari")) {
-            driver = null;
-        } else if (driverType.equalsIgnoreCase("edge")) {
-            WebDriverManager.edgedriver().setup();
-            // String driverPath="C:\\Users\\olgag\\Downloads";
-            //String path = System.getProperty("user.dir") + "\\MicrosoftWebDriver.exe";
-          //  System.setProperty("webdriver.edge.driver", path);
-          //  EdgeOptions edgeOptions = new EdgeOptions();
-          //  edgeOptions.setAcceptInsecureCerts(true);
-            driver = new EdgeDriver();
+        public static WebDriver getDriver (String browser){
+            String opSysName = System.getProperty("os.name");
+            WebDriver webDriver = null;
+            if (browser.contains("Chrome")) {
+                WebDriverManager.chromedriver().setup();
+                webDriver = new ChromeDriver();
+            }else if(browser.contains("FireFox")) {
+                WebDriverManager.firefoxdriver().setup();
+                webDriver = new FirefoxDriver();
+            }else if(browser.contains("Edge") && opSysName.contains("Windows")) {
+                WebDriverManager.edgedriver().setup();
+                webDriver = new EdgeDriver();
+            }else if(browser.contains("Explorer") && opSysName.contains("Windows")) {
+                WebDriverManager.iedriver().setup();
+                webDriver = new InternetExplorerDriver();
+            }else if(browser.contains("Safari") && opSysName.contains("Windows")) {
+                webDriver = null;
+            }
+            return webDriver;
         }
-        return driver;
-
-
     }
-}
